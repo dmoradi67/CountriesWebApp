@@ -27,9 +27,9 @@ namespace CountriesWebApp
         {
             services.AddControllersWithViews();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            //service Database
-            services.AddDbContext<DataBaseContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DataBaseContext")));
+            
+            //services.AddDbContext<DataBaseContext>(options =>
+            //   options.UseSqlServer(Configuration.GetConnectionString("DataBaseContext")));
 
         }
 
