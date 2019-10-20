@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CountriesWebApp.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CountriesWebApp
 {
@@ -23,6 +26,11 @@ namespace CountriesWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //service Database
+            services.AddDbContext<DataBaseContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("DataBaseContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
