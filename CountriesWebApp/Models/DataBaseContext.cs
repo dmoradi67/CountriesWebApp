@@ -12,17 +12,13 @@ namespace CountriesWebApp.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                                    .SetBasePath(Directory.GetCurrentDirectory())
-                                    .AddJsonFile("appsettings.json");
-            var configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DataBaseContext"]);
+          
         }
 
-        //public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
-        //{
+        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
+        {
 
-        //}
+        }
 
         public DbSet<Country> Countries { get; set;}
         public DbSet<State> states { get; set; }

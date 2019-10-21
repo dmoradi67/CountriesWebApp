@@ -11,15 +11,17 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CountriesWebApp.Controllers
 {
     public class CountryController : Controller
+
     {
+        private DataBaseContext _ctx;
+        public CountryController(DataBaseContext ctx)
+        {
+            _ctx = ctx;
+        }
         public IActionResult Index()
         {
-             DataBaseContext db = new DataBaseContext();
-            //var _ctx =
-            //    new DataBaseContext(ServiceProvider.GetRequiredService<
-            //        DbContextOptions<DataBaseContext>>());
-
-            return View(db.Countries.ToList());
+           
+            return View(_ctx.Countries.ToList());
         }
         public IActionResult Create()
         {
