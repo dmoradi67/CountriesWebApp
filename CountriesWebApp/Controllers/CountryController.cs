@@ -23,9 +23,64 @@ namespace CountriesWebApp.Controllers
            
             return View(_ctx.Countries.ToList());
         }
+        [HttpGet]
         public IActionResult Create()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create([Bind("Name,Description")] Country country)
+        {
 
+            if (ModelState.IsValid)
+            {
+                _ctx.Countries.Add(country);
+                _ctx.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+                           
+            return View();
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var CountryObj = _ctx.Countries
+                .AsNoTracking()
+                .FirstOrDefault(m => m.Id == id);
+                if (CountryObj == null)
+            {
+                return NotFound();
+            }
+            return View(CountryObj);
+            
+        }
+        [HttpPost]
+        public IActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var CountryObj = _ctx.Countries
+                .AsNoTracking()
+                .FirstOrDefault(m => m.Id == id);
+            if (CountryObj == null)
+            {
+                return NotFound();
+            }
+            return View(CountryObj);
+
+        }
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        public IActionResult Detail()
+        {
             return View();
         }
     }
